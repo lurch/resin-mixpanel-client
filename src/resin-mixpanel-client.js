@@ -110,6 +110,23 @@ module.exports = function(token, options) {
 
 				return mixpanel.track(event, props, callback)
 			})
+		},
+		getAnonymousUserId: function() {
+			if (isBrowser) {
+				return mixpanel.get_distinct_id()
+			}
+			else {
+				throw new Error('(Resin Mixpanel Client) function getAnonymousUserId is only available for the browser')
+			}
+
+		},
+		identifyAnonymousUser: function(id) {
+			if (isBrowser) {
+				return mixpanel.identify(id)
+			}
+			else {
+				throw new Error('(Resin Mixpanel Client) function identifyAnonymousUser is only available for the browser')
+			}
 		}
 	}
 
